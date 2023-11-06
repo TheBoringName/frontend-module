@@ -1,3 +1,5 @@
+import Hero from './components/LandingPage/Hero';
+import Cards from './components/LandingPage/Cards';
 // import styles from './App.module.css';
 
 const App = () => {
@@ -5,7 +7,8 @@ const App = () => {
 
   return (
     <>
-      <h1>Witam</h1>
+      <Hero />
+      <Cards />
     </>
   );
 };

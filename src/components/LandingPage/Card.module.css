@@ -1,0 +1,21 @@
+.social-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+span {
+  display: inline-block;
+}
+
+.desc-box {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.desc-box:last-child {
+  margin-bottom: 0;
+}
