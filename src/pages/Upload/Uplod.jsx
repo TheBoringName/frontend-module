@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Result from '../../components/Upload/Result';
 import styles from './Upload.module.css';
 
 const Upload = () => {
@@ -48,6 +49,7 @@ const Upload = () => {
         />
         <button className={`${styles.search} ${styles.btn}`}>Analyze</button>
       </div>
+      <Result />
     </>
   );
 };
