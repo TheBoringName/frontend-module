@@ -1,11 +1,11 @@
-import { Outlet } from 'react-router-dom';
-
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/LandingPage/Navbar';
 
 const Root = () => {
+  const location = useLocation();
   return (
     <>
-      <Navbar />
+      <Navbar route={location.pathname} />
       <div className="container">
         <Outlet />
       </div>

@@ -12,10 +12,6 @@ header {
   margin-bottom: 5rem;
 }
 
-img {
-  width: 100%;
-}
-
 .logo {
   font-weight: 700;
   font-size: 20px;
@@ -42,7 +38,8 @@ img {
 }
 
 .nav-link:hover,
-.nav-link:active {
+.nav-link:active,
+#active {
   color: #364fc7;
   font-weight: 700;
 }

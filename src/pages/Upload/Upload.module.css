@@ -1,0 +1,43 @@
+.upload-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+  column-gap: 2rem;
+}
+
+.btn {
+  border: none;
+  background-color: #91a7ff;
+  font-size: 24px;
+  padding: 0.5rem 3rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.url {
+  grid-row: 1;
+}
+
+.upload-link {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  height: 50px;
+  font-size: 40px;
+  padding: 10px 20px;
+}
+
+.upload-file {
+  grid-row: 3;
+  grid-column: 1 / -1;
+}
+
+.search {
+  grid-row: 4;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.deactivate {
+  display: none;
+}
