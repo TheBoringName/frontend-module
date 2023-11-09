@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Result from '../../components/Upload/Result';
 import styles from './Upload.module.css';
-
+import ProgressBar from '../../components/Upload/ProgressBar'
 const Upload = () => {
   const [link, setLink] = useState('');
   const [file, setFile] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress,setProgress] = useState(0);
   const [display, setDisplay] = useState('upload-link');
 
   function handleLinkChange(e) {
@@ -17,6 +20,22 @@ const Upload = () => {
 
   function handleDisplayChange() {
     setDisplay(`${display === 'upload-link' ? 'upload-file' : 'upload-link'}`);
+  }
+
+  function analyze(){
+    setIsLoaded(false);
+    setIsLoading(true);
+    const interval = setInterval(()=>{
+        setProgress((prevProgress)=>{
+            if(prevProgress<100)
+            return prevProgress+1
+        else {
+            clearInterval(interval);
+            setIsLoaded(true);
+            setIsLoading(false);
+            return 0; }
+        });
+    },50)
   }
 
   return (
@@ -47,8 +66,9 @@ const Upload = () => {
           value={file}
           onChange={handleFileChange}
         />
-        <button className={`${styles.search} ${styles.btn}`}>Analyze</button>
+        <button className={`${styles.search} ${styles.btn}`} onClick={analyze}>Analyze</button>
       </div>
+      {isLoading ? <ProgressBar progress={progress}/>:null}
       <Result />
     </>
   );
