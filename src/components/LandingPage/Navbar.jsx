@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -8,24 +9,24 @@ const Navbar = () => {
         <nav>
           <ul className={styles['links-container']}>
             <li>
-              <a href="" className={styles['nav-link']}>
+              <Link to={`/`}>
                 Home
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="" className={styles['nav-link']}>
+              <Link to={`/upload`}>
                 Upload
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="" className={styles['nav-link']}>
+              <Link to={`/history`}>
                 History
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="" className={styles['nav-link']}>
+              <Link to={`/about`}>
                 About
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

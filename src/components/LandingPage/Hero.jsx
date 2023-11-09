@@ -16,7 +16,7 @@ const Hero = () => {
           </p>
         </div>
         <div className="col d-flex justify-content-end">
-          <ReactSVG src="../../../public/hero.svg" />
+          <ReactSVG src="/hero.svg" />
         </div>
       </div>
     </section>

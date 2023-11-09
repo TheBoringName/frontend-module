@@ -16,7 +16,7 @@ const Cards = () => {
   const info = [
     {
       brandName: 'Tiktok',
-      logo: '../../../public/icons8-tiktok-100.svg',
+      logo: '/icons8-tiktok-100.svg',
       list: [
         {
           key: 1,
@@ -37,7 +37,7 @@ const Cards = () => {
     },
     {
       brandName: 'Instagram',
-      logo: '../../../public/icons8-instagram-100.svg',
+      logo: '/icons8-instagram-100.svg',
       list: [
         {
           key: 4,
@@ -58,7 +58,7 @@ const Cards = () => {
     },
     {
       brandName: 'Youtube',
-      logo: '../../../public/icons8-youtube-100.svg',
+      logo: '/icons8-youtube-100.svg',
       list: [
         {
           key: 7,
