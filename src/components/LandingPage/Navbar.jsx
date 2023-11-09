@@ -9,22 +9,22 @@ const Navbar = () => {
         <nav>
           <ul className={styles['links-container']}>
             <li>
-              <Link to={`/`}>
+              <Link to={`/`} className={styles['nav-link']}>
                 Home
               </Link>
             </li>
             <li>
-              <Link to={`/upload`}>
+              <Link to={`/upload`} className={styles['nav-link']}>
                 Upload
               </Link>
             </li>
             <li>
-              <Link to={`/history`}>
+              <Link to={`/history`} className={styles['nav-link']}>
                 History
               </Link>
             </li>
             <li>
-              <Link to={`/about`}>
+              <Link to={`/about`} className={styles['nav-link']}>
                 About
               </Link>
             </li>
