@@ -1,6 +1,6 @@
 import styles from './Result.module.css';
 import { Smiley, SmileyMeh, SmileySad } from '@phosphor-icons/react';
-
+import responses from '../../../public/mocked_responses.json'
 const Result = () => {
   const date = new Date();
   const status = [
@@ -17,23 +17,27 @@ const Result = () => {
       emoji: <SmileySad size={60} color='#e03131'/>,
     },
   ];
-
+  function getRandomInt(max){
+    return Math.floor(Math.random()* max)
+  }
+  const object = responses[getRandomInt(responses.length)]
   return (
     <>
       <div className={styles.result}>
         <label className={styles.lab}>
+          Title:
+        </label>
+        <p className={styles.summary}>{object.video_id}</p>
+        <label className={styles.lab}>
           Summary text:
         </label>
         <p className={styles.summary}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolor
-          atque aliquid delectus dolores quos iure laudantium soluta. Veniam
-          iure non fugiat corrupti, architecto dolor repellat voluptates ut odio
-          voluptatibus.
+          {object.summary_text}
         </p>
         <div className={styles['status-box']}>
           <p>Summary state: </p>
-          <span>{status[0].grade}</span>
-          {status[0].emoji}
+          <span>{status[object.summary_score].grade}</span>
+          {status[object.summary_score].emoji}
         </div>
         <span className={styles.date}>Date: {date.toISOString()}</span>
       </div>

@@ -35,7 +35,7 @@ const Upload = () => {
             setIsLoading(false);
             return 0; }
         });
-    },50)
+    },30)
   }
 
   return (
@@ -69,7 +69,7 @@ const Upload = () => {
         <button className={`${styles.search} ${styles.btn}`} onClick={analyze}>Analyze</button>
       </div>
       {isLoading ? <ProgressBar progress={progress}/>:null}
-      <Result />
+      {isLoaded?<Result />: null}
     </>
   );
 };
