@@ -1,4 +1,4 @@
-import styles from './progressBar.module.css';
+import styles from './ProgressBar.module.css';
 const ProgressBar = ({progress}) => {
     return (
         <><div className={styles['center']}>Analyzing Video </div><div className="progress"> 
