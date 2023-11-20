@@ -1,0 +1,26 @@
+.result {
+  margin-top: 5rem;
+  padding: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.lab {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.summary,
+.date {
+  font-size: 24px;
+}
+
+.status-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.status-box p {
+  margin: 0;
+}
