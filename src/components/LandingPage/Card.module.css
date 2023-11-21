@@ -19,6 +19,10 @@
   color: #4263eb;
 }
 
+.brand-logo {
+  max-width: 100%;
+}
+
 .social-box-list {
   padding: 3rem 2.5rem;
   display: flex;
@@ -35,4 +39,18 @@
 
 .desc-box:last-child {
   margin-bottom: 0;
+}
+
+@media(max-width: 62em) {
+  .social-box-list {
+    gap: 0.4rem;
+  }
+
+  .desc-box {
+    gap: 0.9rem;
+  }
+}
+
+@media(max-width: 48em) {
+
 }

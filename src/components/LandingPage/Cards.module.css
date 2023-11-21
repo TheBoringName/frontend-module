@@ -1,8 +1,23 @@
-.gird-cards {
+.cards {
   display: grid;
-  column-gap: 12rem;
+  column-gap: 6rem;
 }
 
 .grid--3-col {
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media(max-width: 62em) {
+  .cards {
+    column-gap: 3rem;
+  }
+}
+
+@media(max-width: 48em) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    justify-content: center;
+  }
 }

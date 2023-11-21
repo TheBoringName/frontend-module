@@ -9,11 +9,13 @@
 html {
   font-size: 62.5%;
   line-height: 1;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
   color: #212529;
+  overflow-x: hidden;
 }
 
 .page-box {
@@ -24,3 +26,4 @@ body {
 .padding-sides {
   padding: 0 3.6rem;
 }
+

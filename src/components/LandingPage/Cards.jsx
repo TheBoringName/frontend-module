@@ -82,7 +82,7 @@ const Cards = () => {
 
   return (
     <section className="padding-sides">
-      <div className={`${styles['gird-cards']} ${styles['grid--3-col']}`}>
+      <div className={`${styles['cards']} ${styles['grid--3-col']}`}>
         <Card info={info[0]} />
         <Card info={info[1]} />
         <Card info={info[2]} />
