@@ -1,28 +1,26 @@
-.box-color {
-  background-color: #91a7ff;
-}
-
 header {
   display: flex;
-  width: 1400px;
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 1rem 0;
+  padding: 0 8.2rem;
   margin-bottom: 5rem;
+  background-color: #91a7ff;
+  height: 6.4rem;
 }
 
 .logo {
   font-weight: 700;
-  font-size: 20px;
+  font-size: 2.4rem;
   cursor: pointer;
 }
 
 .links-container {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 3.6rem;
   margin-bottom: 0;
+  padding-left: 0;
 }
 
 .links-container li {
@@ -34,6 +32,8 @@ header {
   display: inline-block;
   text-decoration: none;
   text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #212529;
 }
 
@@ -41,6 +41,5 @@ header {
 .nav-link:active,
 #active {
   color: #364fc7;
-  font-weight: 700;
 }
 
