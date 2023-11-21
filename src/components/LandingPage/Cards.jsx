@@ -10,6 +10,7 @@ import {
   UsersFour,
   NumberCircleOne,
 } from '@phosphor-icons/react';
+import styles from './Cards.module.css';
 
 const Cards = () => {
   const color = '#91a7ff';
@@ -80,17 +81,11 @@ const Cards = () => {
   ];
 
   return (
-    <section>
-      <div className="row align-items-start">
-        <div className="col-4">
-          <Card info={info[0]} />
-        </div>
-        <div className="col-4">
-          <Card info={info[1]} />
-        </div>
-        <div className="col-4">
-          <Card info={info[2]} />
-        </div>
+    <section className="padding-sides">
+      <div className={`${styles['gird-cards']} ${styles['grid--3-col']}`}>
+        <Card info={info[0]} />
+        <Card info={info[1]} />
+        <Card info={info[2]} />
       </div>
     </section>
   );
