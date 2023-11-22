@@ -15,7 +15,7 @@ const Navbar = () => {
       <nav className="main-nav">
         <ul className="links-container">
           <li>
-            <NavLink to={`/`} className="nav-link"  onClick={toggleMenu}>
+            <NavLink to={`/`} className="nav-link" onClick={toggleMenu}>
               Home
             </NavLink>
           </li>

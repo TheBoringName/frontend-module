@@ -58,3 +58,17 @@
     height: 30rem;
   }
 }
+
+@media (max-width: 36em) {
+  .project {
+    font-size: 3rem;
+  }
+
+  .hero-box-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-box-text {
+    font-size: 1.6rem;
+  }
+}
