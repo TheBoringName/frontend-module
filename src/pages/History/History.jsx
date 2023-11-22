@@ -17,12 +17,12 @@ const History = () => {
       emoji: <SmileySad size={60} color='#e03131'/>,
     },
   ];
-  return <>
+  return <section className="fix-height">
     <h1>History</h1>
     {responses.map((object, index)=>(
       <SingleEntry object={object} status={status[object.summary_score]}key={index}/>
     ))}
-  </>
+  </section>
 }
 
 export default History;
