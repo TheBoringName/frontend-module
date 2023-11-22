@@ -126,15 +126,15 @@ body {
     transform: translateX(0);
   }
 
-  .nav-open .icon-mobile-nav[data-name='close-outline'] {
+  .nav-open .icon-mobile-nav[data-name="close-menu"] {
     display: block;
   }
 
-  .nav-open .icon-mobile-nav[data-name='menu-outline'] {
+  .nav-open .icon-mobile-nav[data-name="open-menu"] {
     display: none;
   }
 
-  .main-nav-list {
+  .links-container {
     flex-direction: column;
     gap: 4.8rem;
   }
