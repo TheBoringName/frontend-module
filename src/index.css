@@ -55,6 +55,7 @@ body {
 
 .links-container li {
   list-style: none;
+  z-index: 9999;
 }
 
 .nav-link:link,
@@ -95,6 +96,10 @@ body {
 }
 
 @media (max-width: 48em) {
+  .fix-height {
+    height: 100vh;
+  }
+
   .btn-mobile-nav {
     display: block;
     z-index: 1000;
