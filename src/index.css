@@ -27,6 +27,10 @@ body {
   padding: 0 3.6rem;
 }
 
+.margin-top {
+  margin-top: 12.2rem;
+}
+
 .header {
   display: flex;
   align-items: center;

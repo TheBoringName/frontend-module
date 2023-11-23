@@ -3,7 +3,6 @@ import LandingPage from './components/LandingPage/LandingPage.jsx';
 import ErrorPage from './pages/404/ErrorPage.jsx';
 import Upload from './pages/Upload/Uplod.jsx';
 import History from './pages/History/History.jsx';
-import About from './pages/About/About.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import styles from './App.module.css';
 
@@ -24,10 +23,6 @@ const router = createBrowserRouter([
       {
         path: 'history',
         element: <History />,
-      },
-      {
-        path: 'about',
-        element: <About />,
       },
     ],
   },

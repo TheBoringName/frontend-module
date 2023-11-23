@@ -29,11 +29,6 @@ const Navbar = () => {
               History
             </NavLink>
           </li>
-          <li>
-            <NavLink to={`/about`} className="nav-link" onClick={toggleMenu}>
-              About
-            </NavLink>
-          </li>
         </ul>
       </nav>
       <button className="btn-mobile-nav" onClick={toggleMenu}>
