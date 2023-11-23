@@ -2,10 +2,12 @@ import Hero from './Hero';
 import Cards from './Cards';
 
 const LandingPage = () => {
-  return <>
-  <Hero />
-  <Cards />
-  </>
-}
+  return (
+    <main>
+      <Hero />
+      <Cards />
+    </main>
+  );
+};
 
 export default LandingPage;

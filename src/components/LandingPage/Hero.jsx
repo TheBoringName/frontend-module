@@ -7,10 +7,14 @@ const Hero = () => {
       <div className={`${styles['grid-hero']} ${styles['grid--2-col']}`}>
         <aside>
           <h2 className={styles.project}>What do they mean?</h2>
-          <p className={styles['hero-box-title']}>Lorem ipsum dolor!</p>
+          <p className={styles['hero-box-title']}>
+            {' '}
+            Your Ultimate Audio and Video Analysis App
+          </p>
           <p className={styles['hero-box-text']}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi minus
-            voluptatibus similique id aspernatur quia,
+            WhatTheyMean is an innovative and versatile web application designed
+            for users seeking to delve into the content of audio and
+            audio-visual files to grasp their context more fully.
           </p>
         </aside>
         <figure className={styles['hero-figure']}>
