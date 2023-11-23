@@ -17,7 +17,7 @@ const History = () => {
       emoji: <SmileySad size={60} color='#e03131'/>,
     },
   ];
-  return <section className="fix-height">
+  return <section className="fix-height padding-sides">
     <h1>History</h1>
     {responses.map((object, index)=>(
       <SingleEntry object={object} status={status[object.summary_score]}key={index}/>
