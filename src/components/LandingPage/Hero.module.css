@@ -1,10 +1,74 @@
-.project {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: -2px;
-  margin-bottom: 3rem;
+.hero-box {
+  margin-bottom: 12rem;
 }
 
-.hero-box {
-  margin-bottom: 120px;
+.grid-hero {
+  display: grid;
+  gap: 2.6rem;
+}
+
+.grid--2-col {
+  grid-template-columns: 3fr 2fr;
+}
+
+.project {
+  font-size: 6.4rem;
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 3.2rem;
+}
+
+.hero-box-title {
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+}
+
+.hero-box-text {
+  font-size: 2rem;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.hero-figure {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-img {
+  max-width: 100%;
+}
+
+
+@media(max-width: 62em) {
+  .project {
+    font-size: 4.2rem;
+  }
+}
+
+@media(max-width: 48em) {
+  .hero-box {
+    margin-bottom: 10rem; 
+  }
+
+  .grid--2-col {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-figure {
+    height: 30rem;
+  }
+}
+
+@media (max-width: 36em) {
+  .project {
+    font-size: 3rem;
+  }
+
+  .hero-box-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-box-text {
+    font-size: 1.6rem;
+  }
 }

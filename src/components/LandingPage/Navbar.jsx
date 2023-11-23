@@ -1,49 +1,41 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
-import styles from './Navbar.module.css';
+import { List, X } from '@phosphor-icons/react';
 
-const Navbar = ({ route }) => {
-  const setIsSelected = () => {
-    const links = [...document.querySelectorAll('a')];
-    const active = links.filter((link) => link.href.includes(route));
-    active.classList === `${styles['#active']}`;
-    console.log(active);
-  };
+const Navbar = () => {
+  const [isMobile, setMobile] = useState(false);
 
-  useEffect(() => {
-    setIsSelected();
-  });
+  function toggleMenu() {
+    setMobile(!isMobile);
+  }
 
   return (
-    <div className={styles['box-color']}>
-      <header className={styles.header}>
-        <span className={styles.logo}>TheBoringName</span>
-        <nav>
-          <ul className={styles['links-container']}>
-            <li>
-              <NavLink to={`/`} className={styles['nav-link']}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`/upload`} className={styles['nav-link']}>
-                Upload
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`/history`} className={styles['nav-link']}>
-                History
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`/about`} className={styles['nav-link']}>
-                About
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </div>
+    <header className={`header ${isMobile ? 'nav-open' : ''}`}>
+      <span className="logo">TheBoringName</span>
+      <nav className="main-nav">
+        <ul className="links-container">
+          <li>
+            <NavLink to={`/`} className="nav-link" onClick={toggleMenu}>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/upload`} className="nav-link" onClick={toggleMenu}>
+              Upload
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`/history`} className="nav-link" onClick={toggleMenu}>
+              History
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+      <button className="btn-mobile-nav" onClick={toggleMenu}>
+        <List size={36} data-name="open-menu" className="icon-mobile-nav" />
+        <X size={36} data-name="close-menu" className="icon-mobile-nav" />
+      </button>
+    </header>
   );
 };
 

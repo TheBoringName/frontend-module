@@ -1,14 +1,13 @@
-import { ReactSVG } from 'react-svg';
 import styles from './Card.module.css';
 
 const Card = ({ info }) => {
   console.log(info.logo);
   return (
-    <figure>
+    <figure className={styles.border}>
       <div className={styles['social-box']}>
-        <span className="mb-2">{info.brandName}</span>
-        <ReactSVG src={info.logo} />
-        <ul className="mt-5">
+        <span className={styles.brand}>{info.brandName}</span>
+        <img src={info.logo} className={styles['brand-logo']}/>
+        <ul className={styles['social-box-list']}>
           {info.list.map((item) => (
             <li className={styles['desc-box']} key={item.key}>{item.icon}{item.desc}</li>
           ))}

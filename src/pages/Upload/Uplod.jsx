@@ -39,7 +39,7 @@ const Upload = () => {
   }
 
   return (
-    <>
+    <main className="padding-sides fix-height">
       <div className={styles['upload-box']}>
         <button
           className={`${styles.url} ${styles.btn}`}
@@ -70,7 +70,7 @@ const Upload = () => {
       </div>
       {isLoading ? <ProgressBar progress={progress}/>:null}
       {isLoaded?<Result />: null}
-    </>
+    </main>
   );
 };
 

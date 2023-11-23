@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -6,7 +6,145 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+  line-height: 1;
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   color: #212529;
+  overflow-x: hidden;
+}
+
+.page-box {
+  max-width: 132rem;
+  margin: 0 auto;
+}
+
+.padding-sides {
+  padding: 0 3.6rem;
+}
+
+.margin-top {
+  margin-top: 12.2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 8.2rem;
+  margin-bottom: 5rem;
+  background-color: #91a7ff;
+  height: 6.4rem;
+  position: relative;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+
+.links-container {
+  display: flex;
+  align-items: center;
+  gap: 3.6rem;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.links-container li {
+  list-style: none;
+  z-index: 9999;
+}
+
+.nav-link:link,
+.nav-link:visited {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.nav-link:hover,
+.nav-link:active,
+#active {
+  color: #364fc7;
+}
+
+.btn-mobile-nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: none;
+}
+
+.icon-mobile-nav {
+  color: #364fc7;
+}
+
+.icon-mobile-nav[data-name='close-menu'] {
+  display: none;
+}
+
+@media (max-width: 62em) {
+  .header {
+    padding: 0 2.4rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .fix-height {
+    height: 100vh;
+  }
+
+  .btn-mobile-nav {
+    display: block;
+    z-index: 1000;
+  }
+
+  .main-nav {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in;
+
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+
+    transform: translateX(100%);
+  }
+
+  .nav-open .main-nav {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  .nav-open .icon-mobile-nav[data-name="close-menu"] {
+    display: block;
+  }
+
+  .nav-open .icon-mobile-nav[data-name="open-menu"] {
+    display: none;
+  }
+
+  .links-container {
+    flex-direction: column;
+    gap: 4.8rem;
+  }
 }

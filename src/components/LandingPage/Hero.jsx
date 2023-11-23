@@ -1,23 +1,25 @@
-import { ReactSVG } from 'react-svg';
+// import { ReactSVG } from 'react-svg';
 import styles from './Hero.module.css';
 
 const Hero = () => {
   return (
-    <section className={styles['hero-box']}>
-      <div className="row">
-        <div className="col-8">
+    <section className={`${styles['hero-box']} padding-sides`}>
+      <div className={`${styles['grid-hero']} ${styles['grid--2-col']}`}>
+        <aside>
           <h2 className={styles.project}>What do they mean?</h2>
-          <p className="title">Lorem ipsum dolor!</p>
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi minus
-            voluptatibus similique id aspernatur quia, incidunt officia ducimus
-            reiciendis libero veniam consequuntur doloremque quidem illo
-            quibusdam sunt magnam commodi. Nemo.
+          <p className={styles['hero-box-title']}>
+            {' '}
+            Your Ultimate Audio and Video Analysis App
           </p>
-        </div>
-        <div className="col d-flex justify-content-end">
-          <ReactSVG src="/hero.svg" />
-        </div>
+          <p className={styles['hero-box-text']}>
+            WhatTheyMean is an innovative and versatile web application designed
+            for users seeking to delve into the content of audio and
+            audio-visual files to grasp their context more fully.
+          </p>
+        </aside>
+        <figure className={styles['hero-figure']}>
+          <img src="/hero.svg" className={styles['hero-img']} />
+        </figure>
       </div>
     </section>
   );
