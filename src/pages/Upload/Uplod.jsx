@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Result from '../../components/Upload/Result';
 import styles from './Upload.module.css';
 import ProgressBar from '../../components/Upload/ProgressBar'
+import axios from 'axios';
 const Upload = () => {
   const [link, setLink] = useState('');
   const [file, setFile] = useState();
@@ -9,7 +10,12 @@ const Upload = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress,setProgress] = useState(0);
   const [display, setDisplay] = useState('upload-link');
+  const [result,setResult] = useState();
 
+  const config = {
+    url: import.meta.env.VITE_BASE_URL,
+    analize: import.meta.env.VITE_ANALIZE,
+  };
   function handleLinkChange(e) {
     setLink(e.target.value);
   }
@@ -18,25 +24,48 @@ const Upload = () => {
     setFile(file, e.target.files[0]);
   }
 
+  function getSource(){
+    if (link.includes("youtube.com")) {
+      return "YouTube";
+    } else if (link.includes("tiktok.com")) {
+      return "TikTok";
+    } else if (link.includes("instagram.com")) {
+      return "Instagram";
+    } else {
+      return "Local";
+    }
+  }
   function handleDisplayChange() {
     setDisplay(`${display === 'upload-link' ? 'upload-file' : 'upload-link'}`);
+    setLink('')
+    setFile();
   }
 
-  function analyze(){
-    setIsLoaded(false);
-    setIsLoading(true);
-    const interval = setInterval(()=>{
-        setProgress((prevProgress)=>{
-            if(prevProgress<100)
-            return prevProgress+1
-        else {
-            clearInterval(interval);
-            setIsLoaded(true);
-            setIsLoading(false);
-            return 0; }
-        });
-    },30)
+  async function displayAnalizeResult(){
+    const dataToSend = {
+      url: link,
+      source: getSource()
+    };
+    console.log(dataToSend)
+    try {
+      const response = await axios.post(`${config.url}/describe`, dataToSend, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        onUploadProgress: progressEvent => {
+          const calculatedProgress = (progressEvent.loaded / progressEvent.total) * 100;
+          setProgress(calculatedProgress);
+        },
+      });
+      console.log(response.data);
+      setProgress(100);
+      setIsLoading(false);
+      setIsLoaded(true)
+    } catch (error) {
+      console.error('Błąd podczas przesyłania danych', error);
+    }
   }
+
 
   return (
     <main className="padding-sides fix-height">
@@ -66,7 +95,7 @@ const Upload = () => {
           value={file}
           onChange={handleFileChange}
         />
-        <button className={`${styles.search} ${styles.btn}`} onClick={analyze}>Analyze</button>
+        <button className={`${styles.search} ${styles.btn}`} onClick={displayAnalizeResult}>Analyze</button>
       </div>
       {isLoading ? <ProgressBar progress={progress}/>:null}
       {isLoaded?<Result />: null}
