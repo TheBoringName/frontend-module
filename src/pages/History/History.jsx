@@ -1,27 +1,66 @@
 import SingleEntry from "../../components/history/SingleEntry";
-import responses from '../../../public/mocked_responses.json';
+import { useState, useEffect } from 'react';
 import { Smiley, SmileyMeh, SmileySad } from '@phosphor-icons/react';
+import axios from 'axios';
+const History = () =>{
+  
+  const config = {
+    url: import.meta.env.VITE_BASE_URL,
+    analize: import.meta.env.VITE_ANALIZE,
+  };
+  const [items, setItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
 
-const History = () => {
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }}
+    
   const status = [
     {
       grade: 'positive',
-      emoji: <Smiley size={60} color='#2f9e44'/>,
+      emoji: <Smiley size={60} color="#2f9e44" />,
     },
     {
       grade: 'neutral',
-      emoji: <SmileyMeh size={60} color='#868e96'/>,
+      emoji: <SmileyMeh size={60} color="#868e96" />,
     },
     {
       grade: 'negative',
-      emoji: <SmileySad size={60} color='#e03131'/>,
+      emoji: <SmileySad size={60} color="#e03131" />,
     },
   ];
+  function getRandomState() {
+    const x= Math.floor(Math.random() * 3);
+    return status[x].emoji
+  }
+  useEffect(() => {
+    // Funkcja do pobrania przedmiotów dla danej strony
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(`${config.url}/history?page=${currentPage}`);
+        console.log(response.data)
+        setItems(response.data);
+      } catch (error) {
+        console.error('Błąd podczas pobierania przedmiotów:', error);
+      }
+    };
+
+    // Wywołaj funkcję przy załadowaniu komponentu i przy zmianie currentPage
+    fetchItems();
+  }, [currentPage]);
+
+  
   return <section className="fix-height padding-sides">
     <h1>History</h1>
-    {responses.map((object, index)=>(
-      <SingleEntry object={object} status={status[object.summary_score]}key={index}/>
-    ))}
+    {items.map((object, index)=>(
+      <SingleEntry object={object} emoji={getRandomState()} key={index}/>
+    )) }
+          <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
+      <button onClick={handleNextPage}>Next</button>
   </section>
 }
 
