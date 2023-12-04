@@ -1,19 +1,16 @@
 import styles from './ProgressBar.module.css';
-const ProgressBar = ({ progress }) => {
+import Loader from "react-spinners/PulseLoader";
+const ProgressBar = () => {
   return (
-    <>
-      <div className={styles['center']}>Analyzing Video </div>
-      <div className="progress">
-        <div
-          className="progress-bar"
-          role="progressbar"
-          aria-valuenow={progress}
-          aria-valuemin="0"
-          aria-valuemax="100"
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>{' '}
-    </>
+      <div className={styles['center']}>
+      <Loader
+  color="#91a7ff"
+  margin={10}
+  size={15}
+/>
+<p>Analyzing Video </p>
+<p>It may takes up to a few minutes</p>
+      </div>
   );
 };
 export default ProgressBar;

@@ -1,8 +1,6 @@
 import styles from './Result.module.css';
 import { Smiley, SmileyMeh, SmileySad } from '@phosphor-icons/react';
-import responses from '../../../public/mocked_responses.json';
-const Result = () => {
-  const date = new Date();
+const Result = ({object}) => {
   const status = [
     {
       grade: 'positive',
@@ -17,22 +15,23 @@ const Result = () => {
       emoji: <SmileySad size={60} color="#e03131" />,
     },
   ];
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+  function getRandomState() {
+    return Math.floor(Math.random() * 3);
   }
-  const object = responses[getRandomInt(responses.length)];
   return (
     <section className={styles.result}>
       <label className={styles.lab}>Title:</label>
-      <p className={styles.title}>{object.video_id}</p>
+      <p className={styles.title}>{object.title}</p>
+      <label className={styles.lab}>Source:</label>
+      <p className={styles.title}>{object.source} ({object.url})</p>
       <label className={styles.lab}>Summary text:</label>
-      <p className={styles.summary}>{object.summary_text}</p>
+      <p className={styles.summary}>{object.analysis}</p>
       <div className={styles['status-box']}>
         <p className={styles['status-box-text']}>Summary state: </p>
-        <span>{status[object.summary_score].grade}</span>
-        {status[object.summary_score].emoji}
+        <span>{status[getRandomState()].grade}</span>
+        {status[getRandomState()].emoji}
       </div>
-      <span className={styles.date}>Date: {date.toISOString()}</span>
+      <span className={styles.date}>Date: {object.analysis_date}</span>
     </section>
   );
 };

@@ -8,7 +8,6 @@ const Upload = () => {
   const [file, setFile] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [progress,setProgress] = useState(0);
   const [display, setDisplay] = useState('upload-link');
   const [result,setResult] = useState();
 
@@ -42,23 +41,19 @@ const Upload = () => {
   }
 
   async function displayAnalizeResult(){
-    const dataToSend = {
+    setIsLoading(true);
+    setIsLoaded(false);
+        const dataToSend = {
       url: link,
       source: getSource()
     };
-    console.log(dataToSend)
     try {
       const response = await axios.post(`${config.url}/describe`, dataToSend, {
         headers: {
           'Content-Type': 'application/json',
         },
-        onUploadProgress: progressEvent => {
-          const calculatedProgress = (progressEvent.loaded / progressEvent.total) * 100;
-          setProgress(calculatedProgress);
-        },
       });
-      console.log(response.data);
-      setProgress(100);
+      setResult(response.data);
       setIsLoading(false);
       setIsLoaded(true)
     } catch (error) {
@@ -95,10 +90,10 @@ const Upload = () => {
           value={file}
           onChange={handleFileChange}
         />
-        <button className={`${styles.search} ${styles.btn}`} onClick={displayAnalizeResult}>Analyze</button>
+        <button className={`${styles.search} ${styles.btn}`} onClick={displayAnalizeResult} disabled={isLoading}>Analyze</button>
       </div>
-      {isLoading ? <ProgressBar progress={progress}/>:null}
-      {isLoaded?<Result />: null}
+      {isLoading? <ProgressBar/>: null}
+      {isLoaded?<Result object={result}/>: null}
     </main>
   );
 };

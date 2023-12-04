@@ -19,6 +19,7 @@
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
+    "react-spinners": "^0.13.8",
     "react-svg": "^16.1.29",
     "styled-components": "^6.1.1"
   },
