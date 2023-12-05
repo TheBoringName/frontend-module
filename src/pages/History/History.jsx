@@ -1,6 +1,5 @@
 import SingleEntry from "../../components/history/SingleEntry";
 import { useState, useEffect } from 'react';
-import { Smiley, SmileyMeh, SmileySad } from '@phosphor-icons/react';
 import axios from 'axios';
 const History = () =>{
   
@@ -19,24 +18,7 @@ const History = () =>{
       setCurrentPage(currentPage - 1);
     }}
     
-  const status = [
-    {
-      grade: 'positive',
-      emoji: <Smiley size={60} color="#2f9e44" />,
-    },
-    {
-      grade: 'neutral',
-      emoji: <SmileyMeh size={60} color="#868e96" />,
-    },
-    {
-      grade: 'negative',
-      emoji: <SmileySad size={60} color="#e03131" />,
-    },
-  ];
-  function getRandomState() {
-    const x= Math.floor(Math.random() * 3);
-    return status[x].emoji
-  }
+
   useEffect(() => {
     // Funkcja do pobrania przedmiotów dla danej strony
     const fetchItems = async () => {
@@ -57,7 +39,7 @@ const History = () =>{
   return <section className="fix-height padding-sides">
     <h1>History</h1>
     {items.map((object, index)=>(
-      <SingleEntry object={object} emoji={getRandomState()} key={index}/>
+      <SingleEntry object={object} key={index}/>
     )) }
           <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
       <button onClick={handleNextPage}>Next</button>

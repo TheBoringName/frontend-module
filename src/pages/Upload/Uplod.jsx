@@ -20,7 +20,8 @@ const Upload = () => {
   }
 
   function handleFileChange(e) {
-    setFile(file, e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
   }
 
   function getSource(){
@@ -34,16 +35,17 @@ const Upload = () => {
       return "Local";
     }
   }
-  function handleDisplayChange() {
-    setDisplay(`${display === 'upload-link' ? 'upload-file' : 'upload-link'}`);
+  function clean() {
     setLink('')
     setFile();
   }
-
+  function x(){
+    console.log(file)
+  }
   async function displayAnalizeResult(){
     setIsLoading(true);
     setIsLoaded(false);
-        const dataToSend = {
+    const dataToSend = {
       url: link,
       source: getSource()
     };
@@ -58,6 +60,7 @@ const Upload = () => {
       setIsLoaded(true)
     } catch (error) {
       console.error('Błąd podczas przesyłania danych', error);
+      setIsLoading(false)
     }
   }
 
@@ -67,13 +70,13 @@ const Upload = () => {
       <div className={styles['upload-box']}>
         <button
           className={`${styles.url} ${styles.btn}`}
-          onClick={handleDisplayChange}
+          onClick={()=>{setDisplay('upload-link');clean()}}
         >
           From url
         </button>
         <button
           className={`${styles.url} ${styles.btn}`}
-          onClick={handleDisplayChange}
+          onClick={()=>{setDisplay('upload-file'); clean()}}
         >
           From device
         </button>
@@ -87,10 +90,11 @@ const Upload = () => {
         <input
           type="file"
           className={`${styles['upload-file']} ${display === 'upload-link' ? styles.deactivate : ''}`}
-          value={file}
           onChange={handleFileChange}
         />
         <button className={`${styles.search} ${styles.btn}`} onClick={displayAnalizeResult} disabled={isLoading}>Analyze</button>
+
+        <button onClick={x} disabled={isLoading}>SHOW</button>
       </div>
       {isLoading? <ProgressBar/>: null}
       {isLoaded?<Result object={result}/>: null}
