@@ -1,14 +1,21 @@
 import styles from './SingleEntry.module.css';
-import arrow from '../../../public/dropdown.png';
-import arrowUp from '../../../public/dropup.png';
+// import arrow from '../../../public/dropdown.png';
+// import arrowUp from '../../../public/dropup.png';
 import { useState } from 'react';
-import { Smiley, SmileyMeh, SmileySad } from '@phosphor-icons/react';
-const emojis={
-  positive: <Smiley size={60} color="#2f9e44" />,
-  negative: <SmileySad size={60} color="#e03131" />,
-  neutral: <SmileyMeh size={60} color="#868e96" />
-}
-const SingleEntry = ({ object}) => {
+import {
+  Smiley,
+  SmileyMeh,
+  SmileySad,
+  CaretCircleDown,
+  CaretCircleUp,
+} from '@phosphor-icons/react';
+const emojis = {
+  positive: <Smiley color="#2f9e44" />,
+  negative: <SmileySad color="#e03131" />,
+  neutral: <SmileyMeh color="#868e96" />,
+};
+
+const SingleEntry = ({ object }) => {
   const [isExtended, setIsExtended] = useState(false);
 
   function dropDown() {
@@ -18,14 +25,12 @@ const SingleEntry = ({ object}) => {
     <aside>
       <figure className={styles.main}>
         <p className={styles.title}>{object.title}</p>
-        <p className={styles.arrow}>
-        {emojis[object.sentiment]}
-          <img
-            src={!isExtended ? arrow : arrowUp}
-            alt="scroll"
-            onClick={dropDown}
-          />
-        </p>
+        <div className={styles.arrow}>
+          <div onClick={dropDown}>
+          {emojis[object.sentiment]}
+            {!isExtended ? <CaretCircleDown /> : <CaretCircleUp />}
+          </div>
+        </div>
       </figure>
       {isExtended ? (
         <div className={styles.description}>

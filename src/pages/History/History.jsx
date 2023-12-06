@@ -1,29 +1,30 @@
-import SingleEntry from "../../components/history/SingleEntry";
+import SingleEntry from '../../components/history/SingleEntry';
 import { useState, useEffect } from 'react';
+import styles from './History.module.css';
 import axios from 'axios';
-const History = () =>{
+
+const History = () => {
   const config = {
     url: import.meta.env.VITE_BASE_URL,
     analize: import.meta.env.VITE_ANALIZE,
   };
   const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1); 
-  const [sentimentFilter, setSentimentFilter] = useState('all'); 
-  const [nameFilter, setNameFilter] = useState(''); 
-  const itemsPerPage = 10; 
-    
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sentimentFilter, setSentimentFilter] = useState('all');
+  const [nameFilter, setNameFilter] = useState('');
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(`${config.url}/history/list?size=999`);
-        console.log(response.data)
+        console.log(response.data);
         setData(response.data);
       } catch (error) {
         console.error('Błąd podczas pobierania przedmiotów:', error);
       }
     };
-0
+    0;
     fetchItems();
   }, []);
   const handleNextPage = () => {
@@ -35,8 +36,11 @@ const History = () =>{
   };
 
   const filteredItems = data.filter((item) => {
-    const matchesSentiment = sentimentFilter === 'all' || item.sentiment === sentimentFilter;
-    const matchesName = nameFilter ? item.title.toLowerCase().includes(nameFilter.toLowerCase()) : true;
+    const matchesSentiment =
+      sentimentFilter === 'all' || item.sentiment === sentimentFilter;
+    const matchesName = nameFilter
+      ? item.title.toLowerCase().includes(nameFilter.toLowerCase())
+      : true;
 
     return matchesSentiment && matchesName;
   });
@@ -47,10 +51,11 @@ const History = () =>{
 
   const isLastPage = indexOfLastItem >= filteredItems.length;
 
-
-  return <section className="fix-height padding-sides">
-    <h1>History</h1>
-    <select
+  return (
+    <section className="fix-height padding-sides">
+      <h1>History</h1>
+      <div className={styles['input-box']}>
+        <select
           value={sentimentFilter}
           onChange={(e) => setSentimentFilter(e.target.value)}
         >
@@ -64,13 +69,28 @@ const History = () =>{
           value={nameFilter}
           onChange={(e) => setNameFilter(e.target.value)}
         />
-        {displayedItems.map((item) => (
-        <SingleEntry object={item}/>
+      </div>
+      {displayedItems.map((item, index) => (
+        <SingleEntry key={index} object={item} />
       ))}
-
-          <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
-      <button onClick={handleNextPage} disabled={isLastPage}>Next</button>
-  </section>
-}
+      <div className={styles.cont}>
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className={styles.btn}
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNextPage}
+          disabled={isLastPage}
+          className={styles.btn}
+        >
+          Next
+        </button>
+      </div>
+    </section>
+  );
+};
 
 export default History;

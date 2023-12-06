@@ -5,3 +5,8 @@
     justify-content: center;
     height: fit-content;
 }
+
+.message {
+    font-size: 2.4rem;
+    font-weight: 600;
+}
