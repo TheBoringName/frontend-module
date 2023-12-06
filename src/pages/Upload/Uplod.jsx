@@ -12,6 +12,7 @@ const Upload = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [display, setDisplay] = useState('upload-link');
   const [result, setResult] = useState();
+  const [base64data, setBase64data] = useState();
 
   const config = {
     url: import.meta.env.VITE_BASE_URL,
@@ -57,14 +58,15 @@ const Upload = () => {
   async function displayAnalizeResult() {
     setIsLoading(true);
     setIsLoaded(false);
+    const src = getSource()
     const dataToSend = {
-      url: link,
-      source: getSource(),
+      url: src == "Local" ? base64data : link,
+      source: src
     };
     try {
       const response = await axios.post(`${config.url}/describe`, dataToSend, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
       });
       setResult(response.data);
@@ -80,16 +82,16 @@ const Upload = () => {
   const displayFile = () =>{
     console.log(file)
   }
-  // const getBase64 = () =>{
-  //    let reader = new FileReader();
-  // reader.onloadend = function () {
-  //   let base64data = reader.result.split(',')[1];
-  //   setBase64data(base64data);
-  //   console.log(base64data)
-  // }
-  // reader.readAsDataURL(file);
+  const getBase64 = () =>{
+     let reader = new FileReader();
+    reader.onloadend = function () {
+      let base64data = reader.result.split(',')[1];
+      setBase64data(base64data);
+      console.log(base64data)
+    }
+  reader.readAsDataURL(file);
 
-  // }
+  }
   return (
     <main className="padding-sides fix-height">
       <div className={styles['upload-box']}>
@@ -134,7 +136,7 @@ const Upload = () => {
         >
           Analyze
         </button>
-        <button onClick={displayFile}>SHOW FILE</button>
+        <button onClick={getBase64}>SHOW FILE</button>
       </div>
       {isLoading ? <ProgressBar /> : null}
       {isLoaded ? <Result object={result} /> : null}
