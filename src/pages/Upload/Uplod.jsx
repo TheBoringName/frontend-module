@@ -76,7 +76,20 @@ const Upload = () => {
       setIsLoading(false);
     }
   }
+  
+  const displayFile = () =>{
+    console.log(file)
+  }
+  // const getBase64 = () =>{
+  //    let reader = new FileReader();
+  // reader.onloadend = function () {
+  //   let base64data = reader.result.split(',')[1];
+  //   setBase64data(base64data);
+  //   console.log(base64data)
+  // }
+  // reader.readAsDataURL(file);
 
+  // }
   return (
     <main className="padding-sides fix-height">
       <div className={styles['upload-box']}>
@@ -121,6 +134,7 @@ const Upload = () => {
         >
           Analyze
         </button>
+        <button onClick={displayFile}>SHOW FILE</button>
       </div>
       {isLoading ? <ProgressBar /> : null}
       {isLoaded ? <Result object={result} /> : null}
