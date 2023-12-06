@@ -39,9 +39,7 @@ const Upload = () => {
     setLink('')
     setFile();
   }
-  function x(){
-    console.log(file)
-  }
+
   async function displayAnalizeResult(){
     setIsLoading(true);
     setIsLoaded(false);
@@ -94,7 +92,6 @@ const Upload = () => {
         />
         <button className={`${styles.search} ${styles.btn}`} onClick={displayAnalizeResult} disabled={isLoading}>Analyze</button>
 
-        <button onClick={x} disabled={isLoading}>SHOW</button>
       </div>
       {isLoading? <ProgressBar/>: null}
       {isLoaded?<Result object={result}/>: null}

@@ -2,47 +2,74 @@ import SingleEntry from "../../components/history/SingleEntry";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 const History = () =>{
-  
   const config = {
     url: import.meta.env.VITE_BASE_URL,
     analize: import.meta.env.VITE_ANALIZE,
   };
-  const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }}
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [sentimentFilter, setSentimentFilter] = useState('all'); 
+  const [nameFilter, setNameFilter] = useState(''); 
+  const itemsPerPage = 10; 
     
 
   useEffect(() => {
-    // Funkcja do pobrania przedmiotów dla danej strony
     const fetchItems = async () => {
       try {
-        const response = await axios.get(`${config.url}/history?page=${currentPage}`);
+        const response = await axios.get(`${config.url}/history/list?size=999`);
         console.log(response.data)
-        setItems(response.data);
+        setData(response.data);
       } catch (error) {
         console.error('Błąd podczas pobierania przedmiotów:', error);
       }
     };
-
-    // Wywołaj funkcję przy załadowaniu komponentu i przy zmianie currentPage
+0
     fetchItems();
-  }, [currentPage]);
+  }, []);
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
-  
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const filteredItems = data.filter((item) => {
+    const matchesSentiment = sentimentFilter === 'all' || item.sentiment === sentimentFilter;
+    const matchesName = nameFilter ? item.title.toLowerCase().includes(nameFilter.toLowerCase()) : true;
+
+    return matchesSentiment && matchesName;
+  });
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const displayedItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
+  const isLastPage = indexOfLastItem >= filteredItems.length;
+
+
   return <section className="fix-height padding-sides">
     <h1>History</h1>
-    {items.map((object, index)=>(
-      <SingleEntry object={object} key={index}/>
-    )) }
+    <select
+          value={sentimentFilter}
+          onChange={(e) => setSentimentFilter(e.target.value)}
+        >
+          <option value="all">All</option>
+          <option value="positive">Positive</option>
+          <option value="negative">Negative</option>
+          <option value="neutral">Neutral</option>
+        </select>
+        <input
+          type="text"
+          value={nameFilter}
+          onChange={(e) => setNameFilter(e.target.value)}
+        />
+        {displayedItems.map((item) => (
+        <SingleEntry object={item}/>
+      ))}
+
           <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
-      <button onClick={handleNextPage}>Next</button>
+      <button onClick={handleNextPage} disabled={isLastPage}>Next</button>
   </section>
 }
 
