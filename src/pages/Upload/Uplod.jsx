@@ -3,6 +3,8 @@ import Result from '../../components/Upload/Result';
 import styles from './Upload.module.css';
 import ProgressBar from '../../components/Upload/ProgressBar';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
 const Upload = () => {
   const [link, setLink] = useState('');
   const [file, setFile] = useState();
@@ -40,6 +42,18 @@ const Upload = () => {
     setFile();
   }
 
+  const notify = () =>
+    toast.error('Something went wrong', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'dark',
+    });
+
   async function displayAnalizeResult() {
     setIsLoading(true);
     setIsLoaded(false);
@@ -58,6 +72,7 @@ const Upload = () => {
       setIsLoaded(true);
     } catch (error) {
       console.error('Błąd podczas przesyłania danych', error);
+      notify();
       setIsLoading(false);
     }
   }
@@ -109,6 +124,19 @@ const Upload = () => {
       </div>
       {isLoading ? <ProgressBar /> : null}
       {isLoaded ? <Result object={result} /> : null}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        className={styles.not}
+      />
     </main>
   );
 };

@@ -21,6 +21,10 @@
   justify-self: flex-start;
 }
 
+.not {
+  font-size: 2.4rem;
+}
+
 .upload-link {
   border-radius: 11px;
   grid-row: 2;
