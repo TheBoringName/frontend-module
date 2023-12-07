@@ -21,6 +21,7 @@
 .input-box select {
   font-size: 2.4rem;
   padding: 1rem 2rem;
+  border-radius: 11px;
 }
 
 .input-box input {
@@ -32,7 +33,7 @@
   font-family: inherit;
   color: #364fc7;
   background-color: #edf2ff;
-  border: none;
+  /* border: none; */
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 

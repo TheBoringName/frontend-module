@@ -36,10 +36,7 @@ const SingleEntry = ({ object }) => {
         <div className={styles.description}>
           {object.analysis}
           <p className={styles.date}>{object.analysis_date}</p>
-          <div className={styles.mood}>
-            <p>{status.grade}</p>
-            <p>{status.emoji}</p>
-          </div>
+          <p className={styles.date}>{object.source}({object.url})</p>
         </div>
       ) : null}
     </aside>

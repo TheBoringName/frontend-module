@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Result from '../../components/Upload/Result';
 import styles from './Upload.module.css';
 import ProgressBar from '../../components/Upload/ProgressBar';
@@ -13,7 +13,8 @@ const Upload = () => {
   const [display, setDisplay] = useState('upload-link');
   const [result, setResult] = useState();
   const [base64data, setBase64data] = useState();
-
+  const [isCoding, setIsCoding] = useState(false);
+  const fileInputRef = useRef(null);
   const config = {
     url: import.meta.env.VITE_BASE_URL,
     analize: import.meta.env.VITE_ANALIZE,
@@ -25,6 +26,7 @@ const Upload = () => {
   function handleFileChange(e) {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
+    getBase64(selectedFile);
   }
 
   function getSource() {
@@ -58,15 +60,15 @@ const Upload = () => {
   async function displayAnalizeResult() {
     setIsLoading(true);
     setIsLoaded(false);
-    const src = getSource()
+    const src = getSource();
     const dataToSend = {
-      url: src == "Local" ? base64data : link,
-      source: src
+      url: src == 'Local' ? base64data : link,
+      source: src,
     };
     try {
       const response = await axios.post(`${config.url}/describe`, dataToSend, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
       });
       setResult(response.data);
@@ -78,20 +80,19 @@ const Upload = () => {
       setIsLoading(false);
     }
   }
-  
-  const displayFile = () =>{
-    console.log(file)
-  }
-  const getBase64 = () =>{
-     let reader = new FileReader();
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+  const getBase64 = (file) => {
+    setIsCoding(true);
+    let reader = new FileReader();
     reader.onloadend = function () {
       let base64data = reader.result.split(',')[1];
       setBase64data(base64data);
-      console.log(base64data)
-    }
-  reader.readAsDataURL(file);
-
-  }
+      setIsCoding(false);
+    };
+    reader.readAsDataURL(file);
+  };
   return (
     <main className="padding-sides fix-height">
       <div className={styles['upload-box']}>
@@ -122,24 +123,33 @@ const Upload = () => {
           onChange={handleLinkChange}
           placeholder="Paste a link"
         />
-        <input
-          type="file"
-          className={`${styles['upload-file']} ${
-            display === 'upload-link' ? styles.deactivate : ''
-          }`}
-          onChange={handleFileChange}
-        />
+        {display === 'upload-file' && (
+          <>
+            <label
+              className={`${styles.pointer} ${styles['upload-link']}`}
+              onClick={handleButtonClick}
+            >
+              Choose a file
+            </label>
+            <input
+              type="file"
+              className={styles['deactivate']}
+              onChange={handleFileChange}
+              ref={fileInputRef}
+            />
+          </>
+        )}
         <button
           className={`${styles.search} ${styles.btn}`}
           onClick={displayAnalizeResult}
-          disabled={isLoading}
+          disabled={isLoading || isCoding}
         >
           Analyze
         </button>
-        <button onClick={getBase64}>SHOW FILE</button>
       </div>
-      {isLoading ? <ProgressBar /> : null}
+      {isLoading ? <ProgressBar type="loading" /> : null}
       {isLoaded ? <Result object={result} /> : null}
+      {isCoding ? <ProgressBar type="code" /> : null}
       <ToastContainer
         position="top-right"
         autoClose={5000}

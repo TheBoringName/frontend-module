@@ -18,7 +18,6 @@ const History = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.get(`${config.url}/history/list?size=999`);
-        console.log(response.data);
         setData(response.data);
       } catch (error) {
         console.error('Błąd podczas pobierania przedmiotów:', error);
