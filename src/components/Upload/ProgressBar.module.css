@@ -3,4 +3,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: fit-content;
+}
+
+.message {
+    font-size: 2.4rem;
+    font-weight: 600;
 }
