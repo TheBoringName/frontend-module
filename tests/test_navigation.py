@@ -21,25 +21,25 @@ class NavigationTest(unittest.TestCase):
             options=options
         )
         self.driver.maximize_window()
-        self.base_url = "http://localhost:8000/"
+        self.base_url = "http://localhost:3000/"
         self.driver.get(self.base_url)
         self.wait = WebDriverWait(self.driver, 10)
 
     def test_goto_upload(self):
         web_driver_utils = WebDriverUtils(driver=self.driver)
         go_to_upload(web_driver_utils)
-        assert self.driver.current_url=="http://localhost:8000/upload"
+        assert self.driver.current_url=="http://localhost:3000/upload"
 
     def test_goto_history(self):
         web_driver_utils = WebDriverUtils(driver=self.driver)
         go_to_history(web_driver_utils)
-        assert self.driver.current_url == "http://localhost:8000/history"
+        assert self.driver.current_url == "http://localhost:3000/history"
 
     def test_goto_homepage(self):
         web_driver_utils = WebDriverUtils(driver=self.driver)
         go_to_upload(web_driver_utils)
         go_to_homepage(web_driver_utils)
-        assert self.driver.current_url == "http://localhost:8000/"
+        assert self.driver.current_url == "http://localhost:3000/"
     def tearDown(self):
         self.driver.quit()
 

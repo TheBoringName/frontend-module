@@ -21,7 +21,7 @@ class HistoryTest(unittest.TestCase):
             options=options
         )
         self.driver.maximize_window()
-        self.base_url = "http://localhost:8000/"
+        self.base_url = "http://localhost:3000/"
         self.driver.get(self.base_url)
         self.wait = WebDriverWait(self.driver, 10)
 

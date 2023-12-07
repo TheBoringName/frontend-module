@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from tests.navigation_utils import go_to_upload
-from tests.upload_utils import  press_analyze_button, result_displayed, bar_loading
+from tests.upload_utils import  press_analyze_button, result_displayed, bar_loading, error_displayed, fill_link
 from tests.web_driver_utils import WebDriverUtils
 
 
@@ -21,20 +21,26 @@ class UploadPageTest(unittest.TestCase):
             options=options
         )
         self.driver.maximize_window()
-        self.base_url = "http://localhost:8000/"
+        self.base_url = "http://localhost:3000/"
         self.driver.get(self.base_url)
         self.wait = WebDriverWait(self.driver, 10)
 
     def test_loading_bar(self):
         web_driver_utils = WebDriverUtils(driver=self.driver)
         go_to_upload(web_driver_utils)
+        fill_link(web_driver_utils)
         press_analyze_button(web_driver_utils)
         assert bar_loading(driver=self.driver)
 
-
+    def test_error_message(self):
+        web_driver_utils = WebDriverUtils(driver=self.driver)
+        go_to_upload(web_driver_utils)
+        press_analyze_button(web_driver_utils)
+        assert error_displayed(driver=self.driver)
     def test_result_displayed(self):
         web_driver_utils = WebDriverUtils(driver=self.driver)
         go_to_upload(web_driver_utils)
+        fill_link(web_driver_utils)
         press_analyze_button(web_driver_utils)
         assert result_displayed(driver=self.driver)
 
