@@ -56,7 +56,10 @@ const History = () => {
       <div className={styles['input-box']}>
         <select
           value={sentimentFilter}
-          onChange={(e) => setSentimentFilter(e.target.value)}
+          onChange={(e) => {
+            setSentimentFilter(e.target.value);
+            setCurrentPage(1);
+          }}
         >
           <option value="all">All</option>
           <option value="positive">Positive</option>
@@ -66,7 +69,10 @@ const History = () => {
         <input
           type="text"
           value={nameFilter}
-          onChange={(e) => setNameFilter(e.target.value)}
+          onChange={(e) => {
+            setNameFilter(e.target.value);
+            setCurrentPage(1);
+          }}
         />
       </div>
       {displayedItems.map((item, index) => (
